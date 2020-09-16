@@ -34,7 +34,8 @@ var pauseState = 0;
 var pausedTime = 0;
 var animationGo = true;
 // SOCKET IO ------------------------ >
-var socket = io();
+// var socket = io();
+var socket = io('https://salty-scrubland-85563.herokuapp.com/');
 // Socket.io receiver to start piece on reicept of 'startpiecebroadcast' msg
 socket.on('startpiecebroadcast', function(data) {
   if (startPieceGate) {
@@ -91,7 +92,8 @@ socket.on('loadPieceBroadcast', function(data) {
 // START TIME SYNC ENGINE ---------------- >
 var ts = timesync.create({
   //server: 'https://safe-plateau-48516.herokuapp.com/timesync',
-  server: '/timesync',
+  server: 'https://salty-scrubland-85563.herokuapp.com/timesync',
+  // server: '/timesync',
   interval: 1000
 });
 ////////////////////////////////////////////////////////////////////////////
