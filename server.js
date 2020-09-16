@@ -2,9 +2,11 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var timesyncServer = require('timesync/server');
-var http = require('http').createServer(app);
-// var io = require('socket.io')(http, {path: 'https://protected-lowlands-00467.herokuapp.com/socket.io'});
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+// var io = require('socket.io')(server, {path: 'https://protected-lowlands-00467.herokuapp.com/socket.io'});
+// var io = require('socket.io')(server);
+io = require('socket.io').listen(server);
+
 
 const PORT = process.env.PORT || 5000
 
@@ -15,7 +17,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 // handle timesync requests
 app.use('/timesync', timesyncServer.requestHandler);
