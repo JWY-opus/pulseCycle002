@@ -3,8 +3,8 @@ var app = express();
 var path = require('path');
 var timesyncServer = require('timesync/server');
 var http = require('http').createServer(app);
-// var io = require('socket.io')(http, {path: 'https://protected-lowlands-00467.herokuapp.com/socket.io'});
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {path: 'https://protected-lowlands-00467.herokuapp.com/socket.io'});
+// var io = require('socket.io')(http);
 
 const PORT = process.env.PORT || 5000
 
