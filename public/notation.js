@@ -93,7 +93,7 @@ socket.on('loadPieceBroadcast', function(data) {
 var ts = timesync.create({
   //server: 'https://safe-plateau-48516.herokuapp.com/timesync',
   // server: 'https://salty-scrubland-85563.herokuapp.com/timesync',
-  server: 'https://pulsecycle002.justinyang.net/timesync',
+  server: 'https://pacific-stream-76943.herokuapp.com/timesync',
   // server: '/timesync',
   interval: 1000
 });
