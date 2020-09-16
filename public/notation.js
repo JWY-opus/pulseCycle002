@@ -35,8 +35,8 @@ var pausedTime = 0;
 var animationGo = true;
 // SOCKET IO ------------------------ >
 // var socket = io();
-console.log(window.location.hostname);
-var socket = io.connect(window.location.hostname);
+// var socket = io.connect(window.location.hostname);
+var socket = io.connect(window.location.hostname, {reconnect: true, transports : ['websocket'], path: '/socket.io'});
 // var socket = io('https://protected-lowlands-00467.herokuapp.com:5000', {path: '/socket.io'});
 
 // Socket.io receiver to start piece on reicept of 'startpiecebroadcast' msg
