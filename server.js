@@ -25,9 +25,12 @@ app.use('/timesync', timesyncServer.requestHandler);
 //socket.io
 io.on('connection', function(socket) {
   socket.on('createEvents', function(data) {
-    socket.emit('createEventsBroadcast', {
+    socket.broadcast.emit('createEventsBroadcast', {
       eventdata: data.eventdata,
     });
+      socket.emit('createEventsBroadcast', {
+        eventdata: data.eventdata,
+      });
   });
   socket.on('startpiece', function(data) {
     socket.emit('startpiecebroadcast', {});
