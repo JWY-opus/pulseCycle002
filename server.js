@@ -3,13 +3,9 @@ var app = express();
 var path = require('path');
 var timesyncServer = require('timesync/server');
 var server = require('http').createServer(app);
-// var io = require('socket.io')(server, {path: 'https://protected-lowlands-00467.herokuapp.com/socket.io'});
-// var io = require('socket.io')(server);
 io = require('socket.io').listen(server);
 
-
 const PORT = process.env.PORT || 5000
-
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -34,18 +30,25 @@ io.on('connection', function(socket) {
   });
   socket.on('startpiece', function(data) {
     socket.emit('startpiecebroadcast', {});
+      socket.broadcast.emit('startpiecebroadcast', {});
   });
   socket.on('pause', function(data) {
     socket.emit('pauseBroadcast', {
       pauseState: data.pauseState,
       pauseTime: data.pauseTime
     });
+      socket.broadcast.emit('pauseBroadcast', {
+        pauseState: data.pauseState,
+        pauseTime: data.pauseTime
+      });
   });
   // LOAD PIECE
   socket.on('loadPiece', function(data) {
-    console.log(data.eventsArray);
     socket.emit('loadPieceBroadcast', {
       eventsArray: data.eventsArray
     });
+      socket.broadcast.emit('loadPieceBroadcast', {
+        eventsArray: data.eventsArray
+      });
   });
 });
