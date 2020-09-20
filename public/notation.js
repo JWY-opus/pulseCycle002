@@ -143,7 +143,7 @@ function startClockSync() {
 // INIT ------------------------------------------------------------------- //
 function init() {
   // 01: MAKE CONTROL PANEL ---------------- >
-  controlPanel = mkCtrlPanel("ctrlPanel", dialW, 200, "Control Panel");
+  controlPanel = mkCtrlPanel("ctrlPanel", dialW, 76, "Control Panel");
   // 02: GET NOTATION SIZES ---------------- >
   availableNotes.forEach(function(it, ix) {
     getImageOgSize(it, function(size, url) {
@@ -459,12 +459,12 @@ function mkCtrlPanel(panelid, w, h, title) {
   ctrlPanelDiv.style.width = w.toString() + "px";
   ctrlPanelDiv.style.height = h.toString() + "px";
   ctrlPanelDiv.setAttribute("id", "ctrlPanel");
-  ctrlPanelDiv.style.backgroundColor = "black";
-  var btnW = 98;
+  ctrlPanelDiv.style.backgroundColor = "green";
+  var btnW = 50;
   // GENERATE PIECE -------------------------------------- >
   var generateNotationButton = document.createElement("BUTTON");
   generateNotationButton.id = 'generateNotationButton';
-  generateNotationButton.innerText = 'Generate Piece';
+  generateNotationButton.innerText = 'Make Piece';
   generateNotationButton.className = 'btn btn-1';
   generateNotationButton.style.width = btnW.toString() + "px";
   generateNotationButton.style.top = "0px";
@@ -523,7 +523,7 @@ function mkCtrlPanel(panelid, w, h, title) {
       input.click();
     }
   });
-  ctrlPanelDiv.appendChild(loadPieceBtn);
+  // ctrlPanelDiv.appendChild(loadPieceBtn);
   // START ------------------------- >
   var startBtn = document.createElement("BUTTON");
   startBtn.id = 'startBtn';
@@ -540,7 +540,7 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  ctrlPanelDiv.appendChild(startBtn);
+  // ctrlPanelDiv.appendChild(startBtn);
   // PAUSE ------------------------- >
   var pauseBtn = document.createElement("BUTTON");
   pauseBtn.id = 'pauseBtn';
@@ -570,7 +570,7 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  ctrlPanelDiv.appendChild(pauseBtn);
+  // ctrlPanelDiv.appendChild(pauseBtn);
   // STOP
   var stopBtn = document.createElement("BUTTON");
   stopBtn.id = 'stopBtn';
@@ -586,7 +586,7 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  ctrlPanelDiv.appendChild(stopBtn);
+  // ctrlPanelDiv.appendChild(stopBtn);
   // SAVE EVENTS
   var saveBtn = document.createElement("BUTTON");
   saveBtn.id = 'saveBtn';
@@ -634,7 +634,7 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  ctrlPanelDiv.appendChild(saveBtn);
+  // ctrlPanelDiv.appendChild(saveBtn);
   // CHANGE TEMPO BUTTON
   var chgTempoBtn = document.createElement("BUTTON");
   chgTempoBtn.id = 'chgTempoBtn';
