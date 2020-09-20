@@ -38,8 +38,8 @@ var pauseState = 0;
 var pausedTime = 0;
 var animationGo = true;
 // SIZE --------------------------- >
-var dialW = 380;
-var dialH = 380;
+var dialW = 360;
+var dialH = 360;
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -203,7 +203,7 @@ function mkDialNO(ix, w, h, x, y, numTicks, ibpm) { // Create OBJECT
   var notationObj = {}; //returned object to add all elements and data
   var cx = w / 2;
   var cy = h / 2;
-  var innerRadius = 80;
+  var innerRadius = 70;
   var noteSpace = 70;
   var midRadius = innerRadius + noteSpace;
   var defaultStrokeWidth = 4;
