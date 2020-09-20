@@ -24,31 +24,41 @@ io.on('connection', function(socket) {
     socket.broadcast.emit('createEventsBroadcast', {
       eventdata: data.eventdata,
     });
-      socket.emit('createEventsBroadcast', {
-        eventdata: data.eventdata,
-      });
+    socket.emit('createEventsBroadcast', {
+      eventdata: data.eventdata,
+    });
   });
   socket.on('startpiece', function(data) {
     socket.emit('startpiecebroadcast', {});
-      socket.broadcast.emit('startpiecebroadcast', {});
+    socket.broadcast.emit('startpiecebroadcast', {});
   });
   socket.on('pause', function(data) {
     socket.emit('pauseBroadcast', {
       pauseState: data.pauseState,
       pauseTime: data.pauseTime
     });
-      socket.broadcast.emit('pauseBroadcast', {
-        pauseState: data.pauseState,
-        pauseTime: data.pauseTime
-      });
+    socket.broadcast.emit('pauseBroadcast', {
+      pauseState: data.pauseState,
+      pauseTime: data.pauseTime
+    });
   });
   // LOAD PIECE
   socket.on('loadPiece', function(data) {
     socket.emit('loadPieceBroadcast', {
       eventsArray: data.eventsArray
     });
-      socket.broadcast.emit('loadPieceBroadcast', {
-        eventsArray: data.eventsArray
-      });
+    socket.broadcast.emit('loadPieceBroadcast', {
+      eventsArray: data.eventsArray
+    });
   });
+  // NEW TEMPO
+  socket.on('newTempo', function(data) {
+    socket.emit('newTempoBroadcast', {
+      newTempo: data.newTempo
+    });
+    socket.broadcast.emit('newTempoBroadcast', {
+      newTempo: data.newTempo
+    });
+  });
+
 });
