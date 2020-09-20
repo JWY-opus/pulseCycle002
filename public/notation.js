@@ -122,8 +122,8 @@ if (window.location.hostname == 'localhost') {
   tsServer = window.location.hostname + '/timesync';
 }
 var ts = timesync.create({
-  server: tsServer,
-  // server: '/timesync',
+  // server: tsServer,
+  server: '/timesync',
   interval: 1000
 });
 ////////////////////////////////////////////////////////////////////////////
