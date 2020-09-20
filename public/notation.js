@@ -143,7 +143,7 @@ function startClockSync() {
 // INIT ------------------------------------------------------------------- //
 function init() {
   // 01: MAKE CONTROL PANEL ---------------- >
-  controlPanel = mkCtrlPanel("ctrlPanel", dialW, 76, "Control Panel");
+  controlPanel = mkCtrlPanel("ctrlPanel", dialW, ctrlPanelH, "Control Panel");
   // 02: GET NOTATION SIZES ---------------- >
   availableNotes.forEach(function(it, ix) {
     getImageOgSize(it, function(size, url) {
@@ -450,7 +450,7 @@ function mkPanel(panelid, svgcanvas, posx, posy, w, h, title) {
 }
 ////////////////////////////////////////////////////////////////////////////
 
-
+var ctrlPanelH = 70;
 // MAKE CONTROL PANEL ------------------------------------------------------ //
 function mkCtrlPanel(panelid, w, h, title) {
   var tpanel;
@@ -459,14 +459,18 @@ function mkCtrlPanel(panelid, w, h, title) {
   ctrlPanelDiv.style.width = w.toString() + "px";
   ctrlPanelDiv.style.height = h.toString() + "px";
   ctrlPanelDiv.setAttribute("id", "ctrlPanel");
-  ctrlPanelDiv.style.backgroundColor = "green";
-  var btnW = 50;
+  ctrlPanelDiv.style.backgroundColor = "black";
+  var btnW = 44;
+  var btnH = 44;
+  var btnHstr = btnH.toString() + "px";
+  var btnSpace = btnW + 6;
   // GENERATE PIECE -------------------------------------- >
   var generateNotationButton = document.createElement("BUTTON");
   generateNotationButton.id = 'generateNotationButton';
   generateNotationButton.innerText = 'Make Piece';
   generateNotationButton.className = 'btn btn-1';
   generateNotationButton.style.width = btnW.toString() + "px";
+  generateNotationButton.style.height = btnHstr;
   generateNotationButton.style.top = "0px";
   generateNotationButton.style.left = "0px";
   generateNotationButton.addEventListener("click", function() {
@@ -484,9 +488,11 @@ function mkCtrlPanel(panelid, w, h, title) {
   loadPieceBtn.innerText = 'Load Piece';
   loadPieceBtn.className = 'btn btn-1';
   loadPieceBtn.style.width = btnW.toString() + "px";
-  // loadPieceBtn.style.top = "66px";
-  loadPieceBtn.style.top = "96px";
-  loadPieceBtn.style.left = "0px";
+  loadPieceBtn.style.height = btnHstr;
+  loadPieceBtn.style.top = "0px";
+  var tSpace = btnSpace;
+  tSpace = tSpace.toString() + "px";
+  loadPieceBtn.style.left = tSpace;
   loadPieceBtn.addEventListener("click", function() {
     if (activateButtons) {
       // UPLOAD pitchChanges from file -------------------------------------- //
@@ -523,16 +529,18 @@ function mkCtrlPanel(panelid, w, h, title) {
       input.click();
     }
   });
-  // ctrlPanelDiv.appendChild(loadPieceBtn);
+  ctrlPanelDiv.appendChild(loadPieceBtn);
   // START ------------------------- >
   var startBtn = document.createElement("BUTTON");
   startBtn.id = 'startBtn';
-  startBtn.innerText = 'START';
+  startBtn.innerText = 'Start';
   startBtn.className = 'btn btn-1_inactive';
   startBtn.style.width = btnW.toString() + "px";
-  startBtn.style.height = "101px";
+  startBtn.style.height = btnHstr;
   startBtn.style.top = "0px";
-  startBtn.style.left = "110px";
+  var tSpace = btnSpace * 2;
+  tSpace = tSpace.toString() + "px";
+  startBtn.style.left = tSpace;
   startBtn.addEventListener("click", function() {
     if (activateButtons) {
       if (activateStartBtn) {
@@ -540,15 +548,18 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  // ctrlPanelDiv.appendChild(startBtn);
+  ctrlPanelDiv.appendChild(startBtn);
   // PAUSE ------------------------- >
   var pauseBtn = document.createElement("BUTTON");
   pauseBtn.id = 'pauseBtn';
   pauseBtn.innerText = 'Pause';
   pauseBtn.className = 'btn btn-1_inactive';
   pauseBtn.style.width = btnW.toString() + "px";
+  pauseBtn.style.height = btnHstr;
   pauseBtn.style.top = "0px";
-  pauseBtn.style.left = "216px";
+  var tSpace = btnSpace * 3;
+  tSpace = tSpace.toString() + "px";
+  pauseBtn.style.left = tSpace;
   pauseBtn.addEventListener("click", function() {
     if (activateButtons) {
       if (activatePauseStopBtn) {
@@ -570,15 +581,18 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  // ctrlPanelDiv.appendChild(pauseBtn);
+  ctrlPanelDiv.appendChild(pauseBtn);
   // STOP
   var stopBtn = document.createElement("BUTTON");
   stopBtn.id = 'stopBtn';
   stopBtn.innerText = 'Stop';
   stopBtn.className = 'btn btn-1_inactive';
   stopBtn.style.width = btnW.toString() + "px";
-  stopBtn.style.top = "48px";
-  stopBtn.style.left = "216px";
+  stopBtn.style.height = btnHstr;
+  stopBtn.style.top = "0px";
+  var tSpace = btnSpace * 4;
+  tSpace = tSpace.toString() + "px";
+  stopBtn.style.left = tSpace;
   stopBtn.addEventListener("click", function() {
     if (activateButtons) {
       if (activatePauseStopBtn) {
@@ -586,15 +600,18 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  // ctrlPanelDiv.appendChild(stopBtn);
+  ctrlPanelDiv.appendChild(stopBtn);
   // SAVE EVENTS
   var saveBtn = document.createElement("BUTTON");
   saveBtn.id = 'saveBtn';
   saveBtn.innerText = 'Save';
   saveBtn.className = 'btn btn-1_inactive';
   saveBtn.style.width = btnW.toString() + "px";
-  saveBtn.style.top = "96px";
-  saveBtn.style.left = "216px";
+  saveBtn.style.height = btnHstr;
+  saveBtn.style.top = "0px";
+  var tSpace = btnSpace * 5;
+  tSpace = tSpace.toString() + "px";
+  saveBtn.style.left = tSpace;
   saveBtn.addEventListener("click", function() {
     if (activateButtons) {
       if (activateSaveBtn) {
@@ -634,32 +651,46 @@ function mkCtrlPanel(panelid, w, h, title) {
       }
     }
   });
-  // ctrlPanelDiv.appendChild(saveBtn);
-  // CHANGE TEMPO BUTTON
-  var chgTempoBtn = document.createElement("BUTTON");
-  chgTempoBtn.id = 'chgTempoBtn';
-  chgTempoBtn.innerText = 'BPM';
-  chgTempoBtn.className = 'btn btn-1';
-  chgTempoBtn.style.width = "40%";
-  chgTempoBtn.addEventListener("click", function() {
-    if (activateButtons) {
-      socket.emit('newTempo', {
-        newTempo: tempoInputField.value
-      });
-    }
-  });
-  // ctrlPanelDiv.appendChild(chgTempoBtn);
-  // TEMPO INPUT FIELD
+  ctrlPanelDiv.appendChild(saveBtn);
+    // TEMPO INPUT FIELD
   var tempoInputField = document.createElement("input");
   tempoInputField.type = 'text';
   tempoInputField.className = 'input__field--yoshiko';
   tempoInputField.id = 'tempoInputField';
   tempoInputField.value = bpm;
+  var inputW = (btnW - 15).toString() + "px";
+  tempoInputField.style.width = inputW;
+  var inputH = (btnH - 25).toString() + "px";
+  tempoInputField.style.height = inputH;
+  tempoInputField.style.top = "0px";
+  var tSpace = (btnSpace * 6) - 3;
+  tSpace = tSpace.toString() + "px";
+  tempoInputField.style.left = tSpace;
   tempoInputField.addEventListener("click", function() {
     tempoInputField.focus();
     tempoInputField.select();
   });
-  // ctrlPanelDiv.appendChild(tempoInputField);
+  tempoInputField.addEventListener("keyup", function(e) {
+    if (e.keyCode === 13) {
+      if (activateButtons) {
+        socket.emit('newTempo', {
+          newTempo: tempoInputField.value
+        });
+      }
+    }
+  });
+  ctrlPanelDiv.appendChild(tempoInputField);
+  // TEMPO INPUT FIELD Label
+  var tempoInputFieldLbl = document.createElement("label");
+  tempoInputFieldLbl.for =  'tempoInputField';
+  tempoInputFieldLbl.style.left = tSpace;
+  tempoInputFieldLbl.style.top = "11px";
+  tempoInputFieldLbl.className = 'input__label input__label--yoshiko';
+
+
+  // tempoInputFieldLbl.style.color = "#a3d39c";
+  tempoInputFieldLbl.innerHTML = "Tempo";
+  ctrlPanelDiv.appendChild(tempoInputFieldLbl);
 
   // jsPanel
   jsPanel.create({
@@ -674,9 +705,14 @@ function mkCtrlPanel(panelid, w, h, title) {
       close: 'remove'
     },
     onsmallified: function(panel, status) {
-      var headerH = window.innerHeight - 36;
-      headerH = headerH.toString() + "px";
-      panel.style.top = headerH;
+      var headerY = window.innerHeight - 36;
+      headerY = headerY.toString() + "px";
+      panel.style.top = headerY;
+    },
+    onunsmallified: function(panel, status) {
+      var headerY = window.innerHeight - ctrlPanelH - 34;
+      headerY = headerY.toString() + "px";
+      panel.style.top = headerY;
     },
     contentOverflow: 'hidden',
     headerTitle: '<small>' + title + '</small>',
