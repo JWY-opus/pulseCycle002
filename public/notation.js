@@ -103,7 +103,6 @@ socket.on('loadPieceBroadcast', function(data) {
     activateSaveBtn = true;
     startBtn.className = 'btn btn-1';
     saveBtn.className = 'btn btn-1';
-    controlPanel.smallify();
   }
 });
 // SOCKET MSG: stopBroadcast
