@@ -58,9 +58,7 @@ socket.on('startpiecebroadcast', function(data) {
     activateStartBtn = false;
     activatePauseStopBtn = true;
     controlPanel.smallify();
-    // var pauseBtn = document.getElementById('pauseBtn');
     pauseBtn.className = 'btn btn-1';
-    // var stopBtn = document.getElementById('stopBtn');
     stopBtn.className = 'btn btn-1';
     startPiece();
     startBtn.className = 'btn btn-1_inactive';
@@ -105,6 +103,7 @@ socket.on('loadPieceBroadcast', function(data) {
     activateSaveBtn = true;
     startBtn.className = 'btn btn-1';
     saveBtn.className = 'btn btn-1';
+    controlPanel.smallify();
   }
 });
 // SOCKET MSG: stopBroadcast
