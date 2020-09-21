@@ -60,5 +60,10 @@ io.on('connection', function(socket) {
       newTempo: data.newTempo
     });
   });
+  // STOP
+  socket.on('stop', function(data) {
+    socket.emit('stopBroadcast', {});
+    socket.broadcast.emit('stopBroadcast', {});
+  });
 
 });

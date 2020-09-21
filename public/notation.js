@@ -107,6 +107,11 @@ socket.on('loadPieceBroadcast', function(data) {
     saveBtn.className = 'btn btn-1';
   }
 });
+// SOCKET MSG: stopBroadcast
+socket.on('stopBroadcast', function(data) {
+  location.reload();
+});
+
 // SOCKET MSG: newTempoBroadcast
 socket.on('newTempoBroadcast', function(data) {
   dial.newTempoFunc(data.newTempo);
@@ -496,35 +501,32 @@ function mkCtrlPanel(panelid, w, h, title) {
   loadPieceBtn.addEventListener("click", function() {
     if (activateButtons) {
       // UPLOAD pitchChanges from file -------------------------------------- //
-      //open file manager and select file name
-      // basically create an input element and 'click' it (see below)
       var input = document.createElement('input');
       input.type = 'file';
       input.onchange = e => {
-        var file = e.target.files[0];
-        var fileName = file.name;
-        //fetch contents of file; parce the string and send to server as array
-        fetch("/savedEvents/" + fileName)
-          .then(response => response.text())
-          .then(text => {
-            var eventsArray = [];
-            var t1 = text.split(";");
-            for (var i = 0; i < t1.length; i++) {
-              if (t1[i] == -1) {
-                eventsArray.push(-1);
-              } else {
-                t2 = [];
-                var temparr = t1[i].split(',');
-                t2.push(temparr[0]);
-                t2.push(parseInt(temparr[1]));
-                t2.push(parseInt(temparr[2]));
-                eventsArray.push(t2);
-              }
+        var reader = new FileReader();
+        reader.readAsText(e.srcElement.files[0]);
+        var me = this;
+        reader.onload = function() {
+          var dataAsText = reader.result;
+          var eventsArray = [];
+          var t1 = dataAsText.split(";");
+          for (var i = 0; i < t1.length; i++) {
+            if (t1[i] == -1) {
+              eventsArray.push(-1);
+            } else {
+              t2 = [];
+              var temparr = t1[i].split(',');
+              t2.push(temparr[0]);
+              t2.push(parseInt(temparr[1]));
+              t2.push(parseInt(temparr[2]));
+              eventsArray.push(t2);
             }
-            socket.emit('loadPiece', {
-              eventsArray: eventsArray
-            });
+          }
+          socket.emit('loadPiece', {
+            eventsArray: eventsArray
           });
+        }
       }
       input.click();
     }
@@ -596,7 +598,7 @@ function mkCtrlPanel(panelid, w, h, title) {
   stopBtn.addEventListener("click", function() {
     if (activateButtons) {
       if (activatePauseStopBtn) {
-        location.reload();
+        socket.emit('stop', {});
       }
     }
   });
@@ -652,7 +654,7 @@ function mkCtrlPanel(panelid, w, h, title) {
     }
   });
   ctrlPanelDiv.appendChild(saveBtn);
-    // TEMPO INPUT FIELD
+  // TEMPO INPUT FIELD
   var tempoInputField = document.createElement("input");
   tempoInputField.type = 'text';
   tempoInputField.className = 'input__field--yoshiko';
@@ -682,7 +684,7 @@ function mkCtrlPanel(panelid, w, h, title) {
   ctrlPanelDiv.appendChild(tempoInputField);
   // TEMPO INPUT FIELD Label
   var tempoInputFieldLbl = document.createElement("label");
-  tempoInputFieldLbl.for =  'tempoInputField';
+  tempoInputFieldLbl.for = 'tempoInputField';
   tempoInputFieldLbl.style.left = tSpace;
   tempoInputFieldLbl.style.top = "11px";
   tempoInputFieldLbl.className = 'input__label input__label--yoshiko';
